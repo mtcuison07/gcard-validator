@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 import org.rmj.appdriver.GRider;
+import org.rmj.appdriver.MiscUtil;
 import org.rmj.appdriver.iface.GEntity;
 import org.rmj.appdriver.SQLUtil;
 
@@ -16,7 +17,7 @@ import org.rmj.appdriver.SQLUtil;
  * @author kalyptus
  * @serial 201804130917
  */
-public class MCSalesPointValidator implements GCardPoint{
+public class MCSalesPointValidatorx implements GCardPoint{
    private GRider poRider;
    private GEntity poData;
    private long pnTranTotl;
@@ -24,7 +25,7 @@ public class MCSalesPointValidator implements GCardPoint{
    private String psMessage;
    private String psTransNo;
    
-   public MCSalesPointValidator(){
+   public MCSalesPointValidatorx(){
       this.poRider = null;
       this.poData = null;
       this.pnTranTotl = 0;
@@ -49,7 +50,7 @@ public class MCSalesPointValidator implements GCardPoint{
         String date = SQLUtil.dateFormat((Date)poData.getValue("dTransact"), "yyyy-MM-dd");
         String refer = (String)poData.getValue("sSourceNo");
 
-        String lsSQL = "";
+        String lsSQL;
         lsSQL = "SELECT b.sTransNox, b.sSerialID, b.sReplMCID" +  
                         " FROM MC_SO_Master a" +
                             ", MC_SO_Detail b" +
@@ -60,7 +61,7 @@ public class MCSalesPointValidator implements GCardPoint{
                             " AND a.cTranStat <> '3'" +
                             " AND b.sSerialID <> ''" +
                             " AND b.cMotorNew = '1'";
-        
+        //String lsSQL = getSQ_Source(branch, date, refer);
         ResultSet loRS = poRider.executeQuery(lsSQL);
         System.out.println(lsSQL);
         this.psTransNo = "";
