@@ -211,11 +211,13 @@ public class MCSalesPointValidator implements GCardPoint{
             
             String lsService = "INSERT INTO MC_Serial_Service(sSerialID, sGCardNox, nYellowxx, nWhitexxx, dTransact, cRecdStat)" +
                     " VALUES( " + SQLUtil.toSQL(loRS.getString("sSerialID")) +
-                    ", " + SQLUtil.toSQL((String)poData.getValue("")) +
+                    ", " + SQLUtil.toSQL((String) poData.getValue("sGCardNox")) +
                     ", " + SQLUtil.toSQL(lnYellow) +
                     ", " + SQLUtil.toSQL(lnWhite) +
                     ", " + SQLUtil.toSQL(SQLUtil.dateFormat((Date)poData.getValue("dTransact"), "yyyy-MM-dd")) +
                     ", " + SQLUtil.toSQL("0") + ")";
+            
+            System.out.println(lsService);
             poRider.executeQuery(lsService, "MC_Serial_Service", "", "");
             
             if(poRider.getErrMsg().length() > 0){
